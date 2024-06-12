@@ -10,7 +10,7 @@ async function bootstrap() {
     logger: ['error', 'log', 'debug'],
   });
 
-  // CORS
+  // CORS Option
   const options: CorsOptions = {
     origin: '*',
     methods: 'GET, HEAD, PUT, PATCH, POST, DELETE, OPTIONS',
