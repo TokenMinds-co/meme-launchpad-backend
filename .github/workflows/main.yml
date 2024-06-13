@@ -1,0 +1,35 @@
+name: Deployment Workflow
+
+# Trigger this workflow on pushes to the specified branch
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16' # Specify your Node.js version
+
+      - name: SSH Deploy
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }} # Your server's IP address
+          username: ${{ secrets.USERNAME }} # Your server's username
+          key: ${{ secrets.SSH_PRIVATE_KEY }} # Your server's SSH private key
+          debug: true
+          script: |
+            cd /path/to/your/nestjs/app # Specify the path to your NestJS app directory on the server
+            git pull origin main
+            npm install
+            npx prisma generate
+            npm run build
+            pm2 restart ecosystem.config.js # Replace with your PM2 service name
