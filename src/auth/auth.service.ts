@@ -6,12 +6,12 @@ import { ConfigService } from '@nestjs/config';
 // import * as bcrypt from 'bcrypt';
 // const SALT_ROUNDS = 10;
 
-// interface ValidateUserResponse {
-//   name: string;
-//   email: string;
-//   // role: $Enums.Role;
-//   password: string;
-// }
+interface ValidateUserResponse {
+  name: string;
+  email: string;
+  password: string;
+  // role: $Enums.Role;
+}
 
 @Injectable()
 export class AuthService {
@@ -22,4 +22,26 @@ export class AuthService {
   ) {}
 
   private readonly logger = new Logger(AuthService.name);
+
+  async validateUser(
+    email: string,
+    password: string,
+  ): Promise<ValidateUserResponse> {
+    // const user = await this.usersService.findByEmail(email);
+    // if (user) {
+    //   const isValidPassword = await bcrypt.compare(password, user.password);
+    //   if (!isValidPassword) {
+    //     throw new UnauthorizedException('Invalid credentials');
+    //   }
+    //   delete user.password;
+    //   return user;
+    // }                                                             ==> RE-ENABLE AND ADJUST THIS LATER
+    // throw new UnauthorizedException('Invalid credentials');
+
+    return {
+      name: 'test',
+      email,
+      password,
+    };
+  }
 }
