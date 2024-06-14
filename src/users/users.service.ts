@@ -28,7 +28,7 @@ export class UsersService {
       // const result = {
       //   id: user.id,
       //   name: user.name,
-      //   emai: user.email
+      //   email: user.email
       //   role: user.role,
       //   password: user.password,
       // };
